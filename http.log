@@ -79,3 +79,10 @@
 {"level":"http","message":"::1 - - [09/Jan/2022:19:10:55 +0000] \"PATCH /users/48 HTTP/1.1\" 500 513 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"http","message":"::1 - - [09/Jan/2022:19:14:03 +0000] \"PATCH /users/48 HTTP/1.1\" 404 149 \"-\" \"PostmanRuntime/7.28.4\"\n"}
 {"level":"http","message":"::1 - - [09/Jan/2022:19:33:34 +0000] \"GET /users/4 HTTP/1.1\" 401 - \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::1 - - [09/Jan/2022:19:48:48 +0000] \"GET /users/4 HTTP/1.1\" 401 - \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::1 - - [09/Jan/2022:19:51:57 +0000] \"GET /error HTTP/1.1\" 500 14 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::1 - - [09/Jan/2022:20:14:03 +0000] \"GET /users/4 HTTP/1.1\" 401 - \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::1 - - [09/Jan/2022:20:24:13 +0000] \"GET /users/4 HTTP/1.1\" 400 14 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::1 - - [09/Jan/2022:20:25:11 +0000] \"GET /users/4 HTTP/1.1\" 400 14 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::ffff:127.0.0.1 - - [09/Jan/2022:20:27:32 +0000] \"GET /users/4 HTTP/1.1\" 400 14 \"-\" \"PostmanRuntime/7.28.4\"\n"}
+{"level":"http","message":"::1 - - [09/Jan/2022:20:28:47 +0000] \"GET /users/4 HTTP/1.1\" 400 27 \"-\" \"PostmanRuntime/7.28.4\"\n"}
