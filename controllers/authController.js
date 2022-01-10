@@ -14,19 +14,8 @@ require("dotenv").config();
 
 exports.signup = async (req, res, next) => {
   try {
-    if (
-      req.body.email == "" ||
-      req.body.password == "" ||
-      req.body.username == ""
-    ) {
-      return res.status(400).json({
-        message: "Please fill all the fields",
-      });
-    }
-
     const validateData = _.pick(req.body, ["username", "email", "password"]);
-    console.log(validateData);
-    
+
     //validator
     const userSchema = authValidator.signup;
     const validateResult = userSchema.validate(req.body, validateData);
@@ -38,12 +27,12 @@ exports.signup = async (req, res, next) => {
 
     const user = await createUser(req.body);
 
-    const { id , email } = user;
-    const accessToken = generateAccessToken({ id , email });
-    const refreshToken = generateRefreshToken({ id , email });
+    const { id, email } = user;
+    const accessToken = generateAccessToken({ id, email });
+    const refreshToken = generateRefreshToken({ id, email });
     refreshTokenList.push(refreshToken);
     return res.status(200).json({
-      status : true,
+      status: true,
       message: "User has been created successfully",
       accessToken,
       refreshToken,
@@ -71,12 +60,12 @@ exports.login = async (req, res, next) => {
       });
     }
 
-    const { id , email } = user;
-    const accessToken = generateAccessToken({ id , email });
-    const refreshToken = generateRefreshToken({ id , email });
+    const { id, email } = user;
+    const accessToken = generateAccessToken({ id, email });
+    const refreshToken = generateRefreshToken({ id, email });
     refreshTokenList.push(refreshToken);
     return res.status(200).json({
-      status : true,
+      status: true,
       message: "User has been logged in successfully",
       accessToken,
       refreshToken,

@@ -9,20 +9,20 @@ const router = require("./routes");
 const CreateError = require("http-errors");
 const errorHandler = require("./middlewares/errorHandler");
 dotenv = require("dotenv");
+const PORT = process.env.PORT || 3000;
 
 app.use(compression());
 app.use(bodyParser.json());
-app.use(cors({ origin: '*'}));
+app.use(cors({ origin: "*" }));
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(router);
 
-// for parsing multipart/form-data
-app.use('/uploads/', express.static('uploads/')); 
+app.use("/uploads/", express.static("uploads/"));
 
-app.get("*", (req, res,next) => {
+app.get("*", (req, res, next) => {
   res.status(404).json({
     message: "Page not found",
   });
@@ -35,8 +35,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000!");
+app.listen(PORT, () => {
+  console.log("Server is listening on port " + PORT);
 });
 
 app.use(errorHandler);
