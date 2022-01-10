@@ -70,3 +70,16 @@
 {"level":"error","message":"User already exists","timestamp":"2022-01-10T09:14:38.165Z"}
 {"level":"error","message":"User already exists","timestamp":"2022-01-10T09:15:50.960Z"}
 {"level":"error","message":"User already exists","timestamp":"2022-01-10T09:42:43.097Z"}
+{"level":"error","message":"Invalid Email or Password","timestamp":"2022-01-10T14:06:44.819Z"}
+{"level":"error","message":"User already exists","timestamp":"2022-01-10T14:06:44.863Z"}
+{"level":"error","message":"User not found","timestamp":"2022-01-10T14:13:57.854Z"}
+{"level":"error","message":"User not found","timestamp":"2022-01-10T14:14:00.308Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:23:24.648Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:23:53.048Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:27:25.786Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:28:33.192Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:34:02.129Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:34:43.473Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:35:03.402Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:35:25.683Z"}
+{"clientVersion":"3.7.0","level":"error","timestamp":"2022-01-10T14:42:50.372Z"}

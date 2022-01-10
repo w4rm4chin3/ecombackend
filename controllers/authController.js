@@ -42,7 +42,8 @@ exports.signup = async (req, res, next) => {
     const accessToken = generateAccessToken({ id , email });
     const refreshToken = generateRefreshToken({ id , email });
     refreshTokenList.push(refreshToken);
-    res.json({
+    return res.status(200).json({
+      status : true,
       message: "User has been created successfully",
       accessToken,
       refreshToken,
@@ -74,7 +75,8 @@ exports.login = async (req, res, next) => {
     const accessToken = generateAccessToken({ id , email });
     const refreshToken = generateRefreshToken({ id , email });
     refreshTokenList.push(refreshToken);
-    res.json({
+    return res.status(200).json({
+      status : true,
       message: "User has been logged in successfully",
       accessToken,
       refreshToken,
@@ -91,7 +93,8 @@ exports.getUserByUserId = async (req, res, next) => {
         id: req.user.id,
       },
     });
-    res.json({
+    return res.status(200).json({
+      status: true,
       message: "User has been fetched successfully",
       user,
     });
@@ -107,7 +110,8 @@ exports.logout = async (req, res, next) => {
     if (index > -1) {
       refreshTokenList.splice(index, 1);
     }
-    res.json({
+    return res.status(200).json({
+      status: true,
       message: "User has been logged out successfully",
     });
   } catch (err) {
@@ -122,12 +126,14 @@ exports.refreshToken = async (req, res, next) => {
     if (index > -1) {
       const user = await verifyRefreshToken(refreshToken);
       const accessToken = generateAccessToken({ email: user.email });
-      res.json({
+      return res.status(200).json({
+        status: true,
         message: "User has been refreshed successfully",
         accessToken,
       });
     } else {
-      res.status(401).json({
+      return res.status(400).json({
+        status: false,
         message: "Invalid refresh token",
       });
     }

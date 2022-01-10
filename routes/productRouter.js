@@ -7,11 +7,14 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/productController");
+// const multer  = require('multer')
+// const upload = multer({ dest: 'uploads/' })
+const upload = require("../utils/multer").upload();
 
-router.use("/all", getProducts);
+router.post("/createProduct",upload.single('image'),createProduct);
+router.get("", getProducts);
+router.get("/:id", getProductsById);
 router.put("/updateproduct/:id", updateProduct);
-router.use("/:id", getProductsById);
-router.post("/createProduct", createProduct);
-router.delete("/deleteProduct", deleteProduct);
+router.delete("/deleteProduct/:id", deleteProduct);
 
 module.exports = router;

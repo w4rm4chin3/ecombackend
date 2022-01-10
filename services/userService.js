@@ -5,14 +5,17 @@ const CreateError = require("http-errors");
 const logger = require("../utils/logger");
 require("dotenv").config();
 
-exports.updateUser = async ({ name, email, password }) => {
+exports.updateUser = async ({ userId, username, mobile, email }) => {
   try {
+    const userDataId = parseInt(userId);
     const user = await prisma.user.update({
       where: {
-        email: email,
+        id : userDataId
       },
       data: {
-        name: name,
+        username: username,
+        mobile: mobile,
+        email: email,
       },
     });
 
@@ -48,7 +51,7 @@ exports.getUser = async ({ userId }) => {
     const userIdInt = parseInt(userId);
     const user = await prisma.user.findUnique({
       where: {
-        id: userIdInt
+        id: userIdInt,
       },
     });
 
@@ -63,11 +66,12 @@ exports.getUser = async ({ userId }) => {
   }
 };
 
-exports.deleteUser = async ({ id }) => {
+exports.deleteUser = async ({ userId }) => {
   try {
+    const userIdInt = parseInt(userId);
     const user = await prisma.user.delete({
       where: {
-        id
+        id: userIdInt
       },
     });
 

@@ -10,9 +10,10 @@ require('../middlewares/passport');
 const passport = require('passport')
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-// router.post('/update/:id', jwtAuth, updateUser);
-// router.post('/delete/:id', jwtAuth, deleteUser);
-router.get('/', getAllUsers);
+router.get('', getAllUsers);
 router.get('/:id', jwtAuth, getUser);
+// router.get('/:id', getUser);
+router.put('/updateUser/:id', updateUser);
+router.delete('/deleteUser/:id', deleteUser);
 
 module.exports = router;
