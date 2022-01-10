@@ -8,7 +8,7 @@ const {
 const authValidator = require("../middlewares/authValidator");
 const passport = require("passport");
 require("../utils/authStrategy")(passport);
-
+const _ = require("lodash");
 const refreshTokenList = [];
 require("dotenv").config();
 
@@ -17,25 +17,28 @@ exports.signup = async (req, res, next) => {
     if (
       req.body.email == "" ||
       req.body.password == "" ||
-      req.body.name == ""
+      req.body.username == ""
     ) {
       return res.status(400).json({
         message: "Please fill all the fields",
       });
     }
 
-    const user = await createUser(req.body);
-
+    const validateData = _.pick(req.body, ["username", "email", "password"]);
+    console.log(validateData);
+    
     //validator
     const userSchema = authValidator.signup;
-    const validateResult = userSchema.validate(req.body, user);
+    const validateResult = userSchema.validate(req.body, validateData);
     if (validateResult.error) {
       return res.status(400).json({
         message: validateResult.error.details[0].message,
       });
     }
 
-    const { id } = user;
+    const user = await createUser(req.body);
+
+    const { id , email } = user;
     const accessToken = generateAccessToken({ id , email });
     const refreshToken = generateRefreshToken({ id , email });
     refreshTokenList.push(refreshToken);
@@ -46,9 +49,6 @@ exports.signup = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
-    res.status(400).json({
-      message: err.message,
-    });
   }
 };
 
@@ -81,9 +81,6 @@ exports.login = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
-    res.status(400).json({
-      message: "Invalid email or password",
-    });
   }
 };
 
@@ -100,9 +97,6 @@ exports.getUserByUserId = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
-    res.status(400).json({
-      message: err.message,
-    });
   }
 };
 
@@ -118,9 +112,6 @@ exports.logout = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
-    res.status(400).json({
-      message: err.message,
-    });
   }
 };
 
@@ -142,8 +133,5 @@ exports.refreshToken = async (req, res, next) => {
     }
   } catch (err) {
     next(err);
-    res.status(401).json({
-      message: "Invalid refresh token",
-    });
   }
 };

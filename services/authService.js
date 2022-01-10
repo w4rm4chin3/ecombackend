@@ -8,7 +8,7 @@ const CreateError = require("http-errors");
 const logger = require("../utils/logger");
 require("dotenv").config();
 
-exports.createUser = async ({ name, email, password }) => {
+exports.createUser = async ({ username, email, password }) => {
   try {
     const userExist = await prisma.user.findUnique({
       where: {
@@ -24,7 +24,7 @@ exports.createUser = async ({ name, email, password }) => {
 
     const user = await prisma.user.create({
       data: {
-        name,
+        username,
         password: hashedPassword,
         email,
       },

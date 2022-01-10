@@ -7,25 +7,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model category {
-  id    Int     @id @default(autoincrement())
-  title String? @db.VarChar(255)
+model order_details {
+  id           Int       @id @default(autoincrement())
+  product_id   Int?
+  product_name String?   @db.VarChar(500)
+  qty          String?   @db.VarChar(500)
+  price        String?   @db.VarChar(500)
+  order_id     Int?
+  orders       orders?   @relation(fields: [order_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "order_key")
+  products     products? @relation(fields: [product_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "product_key")
+
+  @@index([order_id], map: "order_key")
+  @@index([product_id], map: "product_key")
 }
 
-model posts {
-  id          Int     @id @default(autoincrement())
-  title       String? @db.VarChar(255)
-  description String? @db.VarChar(2500)
-  categoryId  Int?
-  posts       posts?  @relation("postsToposts_categoryId", fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "categoryID")
-  other_posts posts[] @relation("postsToposts_categoryId")
+model orders {
+  id             Int             @id @default(autoincrement())
+  customer_id    Int?
+  first_name     String?         @db.VarChar(500)
+  last_name      String?         @db.VarChar(500)
+  address        String?         @db.VarChar(500)
+  town           String?         @db.VarChar(500)
+  pincode        String?         @db.VarChar(500)
+  email          String?         @db.VarChar(500)
+  phone          String?         @db.VarChar(500)
+  order_status   String?         @db.VarChar(500)
+  payment_status String?         @db.VarChar(500)
+  shipping_rate  String?         @db.VarChar(500)
+  grand_total    String?         @db.VarChar(500)
+  order_details  order_details[]
+}
 
-  @@index([categoryId], map: "categoryID")
+model products {
+  id            Int             @id @default(autoincrement())
+  name          String?         @db.VarChar(500)
+  price         String?         @db.VarChar(500)
+  description   String?         @db.VarChar(500)
+  image         String?         @db.VarChar(500)
+  order_details order_details[]
 }
 
 model user {
   id       Int     @id @default(autoincrement())
-  name     String? @db.VarChar(255)
-  email    String? @unique @db.VarChar(255)
-  password String? @db.VarChar(255)
+  username String? @db.VarChar(500)
+  mobile   String? @db.VarChar(500)
+  password String? @db.VarChar(500)
+  email    String? @db.VarChar(500) @unique
 }

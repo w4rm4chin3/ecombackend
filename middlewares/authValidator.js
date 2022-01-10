@@ -2,7 +2,7 @@ const Joi = require('joi')
 
 const schemas = { 
   signup: Joi.object().keys({ 
-    name: Joi.string()
+    username: Joi.string()
     .min(3)
     .max(30)
     .required(),

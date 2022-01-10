@@ -7,13 +7,8 @@ const morgan = require("morgan");
 const compression = require("compression");
 const router = require("./routes");
 const logger = require("./utils/logger");
+const CreateError = require("http-errors");
 
-const morganMiddleware = morgan("combined", {
-  skip: (req, res) => res.statusCode < 400,
-  stream: {
-    write: (msg) => logger.http(msg),
-  },
-});
 const errorHandler = require("./middlewares/errorHandler");
 
 dotenv = require("dotenv");
@@ -23,11 +18,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
 app.use(morgan("tiny"));
-app.use(morganMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(router);
 app.use(errorHandler);
+
+app.get("*", (req, res) => {
+  res.send("OOPS! Looks like you are lost.", 404);
+});
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
